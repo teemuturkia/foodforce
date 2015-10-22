@@ -15,6 +15,12 @@ npm install
 bower install
 ```
 
+### Add restaurants to db
+```
+node util/ruokapaikka.fi.parser.js
+```
+You can run that command manually or setup to run it frequently by adding it to crontabs.
+
 ### Run unit tests
 ```
 npm test
