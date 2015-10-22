@@ -1,0 +1,11 @@
+{
+  "name": "ruokapaikka",
+  "version": "1.0.0",
+  "license": "MIT",
+  "directory": "public/components/",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "angular-resource": "~1.4.7"
+  }
+}
