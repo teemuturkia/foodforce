@@ -19,6 +19,9 @@ function parseContent(content) {
   var startIndex = html.indexOf(today) + 10;
   var endIndex = html.indexOf('</p>', startIndex);
   var menu = html.substring(startIndex, endIndex);
+  if(menu.indexOf('<br>') === 0) {
+    menu = menu.substr(4);
+  }
   return saveRestaurant(title, menu);
 }
 
@@ -47,7 +50,7 @@ function loadUrl(url) {
 function saveRestaurant(title, menu) {
   return Restaurant.create({
     name: title,
-    menu: menu
+    menu: menu || 'Ei ruokalistaa'
   });
 }
 

@@ -16,8 +16,7 @@ module.exports = {
     ],
     "static": [
       "Angela",
-      "Kiinalainen",
-      "Three Wings"
+      "Kiinalainen"
     ]
   }
 }

@@ -1,3 +1,12 @@
 'use strict';
 
-angular.module('lunch-force', ['ngResource']);
+var app = angular.module('lunch-force', [
+  'ngResource',
+  'ui.bootstrap'
+]);
+
+app.filter("sanitize", ['$sce', function($sce) {
+  return function(htmlCode){
+    return $sce.trustAsHtml(htmlCode);
+  }
+}]);

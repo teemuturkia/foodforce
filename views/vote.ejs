@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-sm-12" ng-controller="VoteCtrl">
+    <ul class="restaurants">
+      <li class="vote-box" ng-class="'bg-' + $index % 4" ng-repeat="restaurant in restaurants|orderBy: 'menu'">
+        <h3>{{ restaurant.name }}</h3>
+        {{ restaurant.points }}
+        <p class="menu"
+           ng-bind-html="restaurant.menu | sanitize"></p>
+        {{ restaurant.max }}
+        <div class="vote-wrapper" ng-if="render">
+          <uib-rating
+            ng-model="restaurant.points"
+            ng-change="updatePoints()"
+            class="stars"
+            max="restaurant.max">
+          </uib-rating>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
