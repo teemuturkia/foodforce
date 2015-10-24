@@ -2,6 +2,7 @@
 
 var app = angular.module('lunch-force', [
   'ngResource',
+  'ngCookies',
   'ui.bootstrap'
 ]);
 

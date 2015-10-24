@@ -1,16 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Berkshire+Swash&subset=latin,latin-ext);
 
 body {
-  padding: 0 50px;
+  padding: 0 50px 100px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 h1, h2, h3 {
-  font-family: 'Berkshire Swash', cursive;
   text-align: center;
 }
 
 h1 {
+  font-family: 'Berkshire Swash', cursive;
   font-size: 3em;
 }
 
@@ -19,6 +19,7 @@ h2 {
 }
 
 h3 {
+  font-family: 'Berkshire Swash', cursive;
   border-bottom: 1px dashed white;
 }
 
@@ -82,4 +83,15 @@ h3 {
   user-select: none;
   outline: none;
   cursor: pointer;
+}
+
+.sticky-footer {
+  position: fixed;
+  padding: 20px;
+  border-top: 1px solid black;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: white;
 }

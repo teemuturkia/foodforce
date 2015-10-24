@@ -8,4 +8,12 @@ router.get('/restaurant', function(req, res) {
   });
 });
 
+router.post('/vote', function(req, res) {
+  console.log('received', req.body);
+  res.cookie('vote', true, {
+    'maxAge': 36000000
+  });
+  res.status(204).send();
+});
+
 module.exports = router;

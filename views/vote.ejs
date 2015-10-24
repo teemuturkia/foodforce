@@ -1,14 +1,28 @@
-<div class="row">
-  <div class="col-sm-12" ng-controller="VoteCtrl">
+<div class="row" ng-controller="VoteCtrl">
+  <div class="col-sm-4 col-sm-offset-4" ng-if="!user.name">
+    <h2>Anna nimesi</h2>
+    <form ng-submit="saveName()">
+      <div class="input-group">
+        <input
+          class="form-control"
+          ng-model="user.tempName"
+          placeholder="Nimi"
+          autofocus>
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Kirjaudu</button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-12" ng-if="user.name">
     <ul class="restaurants">
-      <li class="vote-box" ng-class="'bg-' + $index % 4" ng-repeat="restaurant in restaurants|orderBy: 'menu'">
+      <li class="vote-box" ng-class="'bg-' + $index % 4" ng-repeat="restaurant in restaurants|orderBy: 'sort'">
         <h3>{{ restaurant.name }}</h3>
-        {{ restaurant.points }}
         <p class="menu"
            ng-bind-html="restaurant.menu | sanitize"></p>
-        {{ restaurant.max }}
-        <div class="vote-wrapper" ng-if="render">
+        <div class="vote-wrapper">
           <uib-rating
+            ng-if="render"
             ng-model="restaurant.points"
             ng-change="updatePoints()"
             class="stars"
@@ -17,5 +31,12 @@
         </div>
       </li>
     </ul>
+    <div class="sticky-footer">
+      <span ng-if="pointsLeft > 0">Anna vielä {{ pointsLeft }} pistettä.</span>
+      <span ng-if="pointsLeft === 0">
+        Valmis!
+        <button class="btn btn-success" ng-click="vote()">Äänestä</button>
+      </span>
+    </div>
   </div>
 </div>
