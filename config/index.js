@@ -1,7 +1,4 @@
 module.exports = {
-  "mongo": {
-    "url": "mongodb://localhost/ruokapaikka"
-  },
   "restaurants": {
     "urls": [
       "salpakeskus.php",

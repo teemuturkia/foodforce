@@ -12,7 +12,10 @@ var api = require('./routes/api');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/ruokapaikka');
+var mongoUri = process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/ruokapaikka';
+mongoose.connect(mongoUri);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
