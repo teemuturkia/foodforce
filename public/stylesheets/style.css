@@ -95,3 +95,19 @@ h3 {
   text-align: center;
   background: white;
 }
+
+.results {
+  list-style: none;
+  text-align: center;
+}
+
+.results h3 {
+  font-family: serif;
+}
+
+.results .menu {
+  font-size: 0.8em;
+}
+
+.result-box {
+}

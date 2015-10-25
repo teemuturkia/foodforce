@@ -6,7 +6,13 @@ var mongoose = require('mongoose'),
 var VoteSchema = new Schema({
   id: String,
   name: String,
-  menu: String
+  points: [{
+    restaurant: {
+      type: String,
+      ref: 'Restaurant'
+    },
+    points: Number
+  }]
 });
 
 module.exports = mongoose.model('Vote', VoteSchema);

@@ -30,7 +30,7 @@ angular.module('lunch-force').controller('VoteCtrl', function(
   };
 
   $scope.user = {
-    name: 'jore',
+    name: null,
     tempName: ''
   };
 
@@ -60,15 +60,19 @@ angular.module('lunch-force').controller('VoteCtrl', function(
   };
 
   $scope.vote = function() {
-    var result = {};
+    var result = {
+      name: $scope.user.name,
+      points: []
+    };
     $scope.restaurants.forEach(function(restaurant) {
       if(restaurant.points && restaurant.points > 0) {
-        result[restaurant._id] = restaurant.points;
+        result.points.push({
+          restaurant: restaurant._id,
+          points: restaurant.points
+        });
       }
     });
-    console.log('sending', result);
     $http.post('/api/vote', result).then(function(response) {
-      console.log('response', response);
       reloadPage();
     });
   };

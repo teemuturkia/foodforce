@@ -13,7 +13,7 @@ function parseContent(content) {
   $('.linkkipalkki_mobi').remove();
   $('.alamenu').remove();
   var html = $('.tekstit_rs').html();
-  var title = html.substring(html.indexOf('</a> - ') + 7, html.indexOf('<p>'));
+  var title = html.substring(html.indexOf('</a> - ') + 7, html.indexOf('<p>')).trim();
   var date = moment();
   var today = date.format('D.M.');
   var startIndex = html.indexOf(today) + 10;

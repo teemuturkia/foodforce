@@ -1,1 +1,18 @@
-Tulossivu
+<div class="row" ng-controller="ResultsCtrl">
+  <div class="col-sm-12">
+    <ul class="results">
+      <li class="result-box" ng-class="'bg-' + $index" ng-repeat="result in results">
+        <h3>{{ ($index + 1) + ' ' + result.name }}</h3>
+        <strong ng-class="bold">Pisteitä: {{ result.totalPoints }}</strong><br>
+        <small>
+          (<span ng-repeat="points in result.points">
+            {{ points.name }}: {{ points.points }}
+          </span>)
+        </small>
+        <p ng-if="$index === 0"
+           class="menu"
+           ng-bind-html="result.menu | sanitize"></p>
+      </li>
+    </ul>
+  </div>
+</div>

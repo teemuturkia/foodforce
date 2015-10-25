@@ -16,6 +16,9 @@ function renderResultPage(req, res) {
 }
 
 router.get('/', function(req, res) {
+
+  return renderResultPage(req, res);
+
   var now = moment();
   var currentHour = now.hour();
   var currentMinutes = now.minutes();
