@@ -6,7 +6,7 @@ angular.module('lunch-force').controller('VotedCtrl', function($timeout, $window
     var now = new Date();
     var currentHour = now.getHours();
     var currentMinutes = now.getMinutes();
-    if(currentHour < 10 || (currentHour == 10 && currentMinutes < 45)) {
+    if(currentHour < 11) {
       $timeout(checkTime, 10000);
     } else {
       $window.location.reload();
