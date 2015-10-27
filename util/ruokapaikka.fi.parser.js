@@ -4,7 +4,8 @@ var http = require('http'),
     moment = require('moment'),
     config = require('../config'),
     Q = require('q'),
-    Restaurant = require('../models/restaurant');
+    Restaurant = require('../models/restaurant'),
+    Vote = require('../models/vote');
 
 function parseContent(content) {
   var $ = cheerio.load(content, {
@@ -77,7 +78,8 @@ var mongoUri = process.env.MONGOLAB_URI ||
   'mongodb://localhost/ruokapaikka';
 mongoose.connect(mongoUri);
 
-Restaurant.remove({}, function(err) {
-  addRestaurants();
+Vote.remove({}, function(err) {
+  Restaurant.remove({}, function(err) {
+    addRestaurants();
+  });
 });
-
