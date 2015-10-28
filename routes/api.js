@@ -1,18 +1,34 @@
 var express = require('express');
+var moment = require('moment');
 var router = express.Router();
 var _ = require('underscore');
 var Restaurant = require('../models/restaurant');
 var Vote = require('../models/vote');
+var parser = require('../util/ruokapaikka.fi.parser');
+
+var findRestaurants = function(req, res) {
+  var date = moment();
+  var today = date.format('D.M.');
+  Restaurant.find({date: { $eq: today }}, function(err, restaurants) {
+    if(restaurants.length > 0) {
+      res.json(restaurants);
+    } else {
+      parser.parse().then(function() {
+        findRestaurants(req, res);
+      });
+    }
+  });
+};
 
 router.get('/restaurant', function(req, res) {
-  Restaurant.find({}, function(err, restaurants) {
-    res.json(restaurants);
-  });
+  findRestaurants(req, res);
 });
 
 router.get('/results', function(req, res) {
+  var date = moment();
+  var today = date.format('D.M.');
   var results = [];
-  Vote.find({}).populate('points.restaurant').exec(function(err, votes) {
+  Vote.find({date: { $eq: today }}).populate('points.restaurant').exec(function(err, votes) {
     if(err) {
       return res.send(500, err);
     }
@@ -48,6 +64,9 @@ router.get('/results', function(req, res) {
 });
 
 router.post('/vote', function(req, res) {
+  var date = moment();
+  var today = date.format('D.M.');
+  reg.body.date = today;
   Vote.create(req.body, function(err) {
     if(err) {
       return res.send(500, err);

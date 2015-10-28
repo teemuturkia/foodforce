@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var RestaurantSchema = new Schema({
   id: String,
   name: String,
-  menu: String
+  menu: String,
+  date: String
 });
 
 module.exports = mongoose.model('Restaurant', RestaurantSchema);

@@ -1,11 +1,11 @@
 var http = require('http'),
-    mongoose = require('mongoose'),
     cheerio = require('cheerio'),
     moment = require('moment'),
     config = require('../config'),
     Q = require('q'),
     Restaurant = require('../models/restaurant'),
-    Vote = require('../models/vote');
+    Vote = require('../models/vote'),
+    today;
 
 function parseContent(content) {
   var $ = cheerio.load(content, {
@@ -15,14 +15,16 @@ function parseContent(content) {
   $('.alamenu').remove();
   var html = $('.tekstit_rs').html();
   var title = html.substring(html.indexOf('</a> - ') + 7, html.indexOf('<p>')).trim();
-  var date = moment();
-  var today = date.format('D.M.');
+  var menu;
   var startIndex = html.indexOf(today) + 10;
-  var endIndex = html.indexOf('</p>', startIndex);
-  var menu = html.substring(startIndex, endIndex);
-  if(menu.indexOf('<br>') === 0) {
-    menu = menu.substr(4);
+  if(startIndex >= 10) {
+    var endIndex = html.indexOf('</p>', startIndex);
+    menu = html.substring(startIndex, endIndex);
+    if(menu.indexOf('<br>') === 0) {
+      menu = menu.substr(4);
+    }
   }
+
   return saveRestaurant(title, menu);
 }
 
@@ -51,7 +53,8 @@ function loadUrl(url) {
 function saveRestaurant(title, menu) {
   return Restaurant.create({
     name: title,
-    menu: menu || 'Ei ruokalistaa'
+    menu: menu || 'Ei ruokalistaa',
+    date: today
   });
 }
 
@@ -72,15 +75,11 @@ function addRestaurants() {
 }
 
 module.exports.parse = function() {
-  console.log('Start parsing...');
-  console.log('Removing restaurants...');
-  return Vote.remove({}).then(function() {
-    console.log('Restaurants removed...');
-    console.log('Removing votes...');
-    return Restaurant.remove({});
+  var date = moment();
+  today = date.format('D.M.');
+  return Vote.remove({date: {$ne: today} }).then(function() {
+    return Restaurant.remove({date: {$ne: today} });
   }).then(function() {
-    console.log('Votes removed...');
-    console.log('Adding restaurants');
     return addRestaurants();
   });
 };

@@ -12,7 +12,8 @@ var VoteSchema = new Schema({
       ref: 'Restaurant'
     },
     points: Number
-  }]
+  }],
+  date: String
 });
 
 module.exports = mongoose.model('Vote', VoteSchema);
