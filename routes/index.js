@@ -18,7 +18,7 @@ function renderResultPage(req, res) {
 router.get('/', function(req, res) {
   var now = moment();
   var currentHour = now.hour();
-  if(currentHour < 20) {
+  if(currentHour < 11) {
     renderVotePage(req, res);
   } else {
     renderResultPage(req, res);
