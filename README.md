@@ -1,4 +1,4 @@
-lunch-force
+foodforce
 ================
 
 ### Prerequisites
@@ -7,19 +7,13 @@ lunch-force
 - MongoDB
 
 ### Database
-You need to have mongod instance running. If necessary, edit config/index.js to have correct connect url.
+You need to have mongod instance running. Currently server tries to find connect url from 'MONGOLAB_URI' environment variable and then 'MONGOHQ_URL'. If neither is found, then localhost is used.
 
 ### Installation
 ```
 npm install
 bower install
 ```
-
-### Add restaurants to db
-```
-node util/ruokapaikka.fi.parser.js
-```
-You can run that command manually or setup to run it frequently by adding it to crontabs.
 
 ### Run unit tests
 ```
