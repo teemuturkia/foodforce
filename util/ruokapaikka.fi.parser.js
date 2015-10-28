@@ -67,17 +67,26 @@ function addRestaurants() {
     promises.push(saveRestaurant(restaurant));
   });
 
-  Q.all(promises).then(function() {
-    mongoose.disconnect();
-  });
+  return Q.all(promises);
 }
 
+/*
 var mongoUri = process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
   'mongodb://localhost/ruokapaikka';
 mongoose.connect(mongoUri);
+*/
 
-Restaurant.remove({}, function(err) {
-  addRestaurants();
-});
-
+module.exports.parse = function() {
+  console.log('Start parsing...');
+  console.log('Removing restaurants...');
+  return Restaurant.remove({}).then(function() {
+    console.log('Restaurants removed...');
+    console.log('Removing votes...');
+    return Vote.remove({});
+  }).then(function() {
+    console.log('Votes removed...');
+    console.log('Adding restaurants');
+    return addRestaurants();
+  });
+};
