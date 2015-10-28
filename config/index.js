@@ -9,11 +9,15 @@ module.exports = {
       "bhanchhaghar.php",
       "neville.php",
       "pinocchio.php",
-      "rossokouvola.php"
+      "rossokouvola.php",
+      "popsis.php"
     ],
     "static": [
       "Angela",
-      "Kiinalainen"
+      "Kiinalainen",
+      "Subway",
+      "Thaimaalainen",
+      "Hesburger"
     ]
   }
 }

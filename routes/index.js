@@ -16,18 +16,14 @@ function renderResultPage(req, res) {
 }
 
 router.get('/', function(req, res) {
-
-  return renderResultPage(req, res);
-
   var now = moment();
   var currentHour = now.hour();
   var currentMinutes = now.minutes();
-  if(currentHour < 10 || (currentHour == 10 && currentMinutes <= 45)) {
+  if(currentHour < 11) {
     renderVotePage(req, res);
   } else {
     renderResultPage(req, res);
   }
-
 });
 
 module.exports = router;
