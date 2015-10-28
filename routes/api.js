@@ -66,7 +66,7 @@ router.get('/results', function(req, res) {
 router.post('/vote', function(req, res) {
   var date = moment();
   var today = date.format('D.M.');
-  reg.body.date = today;
+  req.body.date = today;
   Vote.create(req.body, function(err) {
     if(err) {
       return res.send(500, err);
